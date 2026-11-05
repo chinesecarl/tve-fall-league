@@ -4,7 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TVE Fall League – Tabelle</title>
-  <meta name="description" content="Tabelle, Spieltage und Modus der TVE Fall League. Ergebnisse werden automatisch aus einem Google Sheet geladen.">
+  <meta name="description" content="Tabelle, Spieltage und Teams der TVE Fall League. Ergebnisse, Spielplan und Teamseiten auf einen Blick.">
+  <meta property="og:title" content="TVE Fall League">
+  <meta property="og:description" content="Tabelle, Spieltage und Teams der TVE Fall League.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#f6f1e8">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f6f1e8'/%3E%3Crect x='8' y='8' width='48' height='48' fill='none' stroke='%23211d17' stroke-width='2'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='24' fill='%23211d17' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -46,10 +51,10 @@
           <h1 id="title-tabelle">Tabelle</h1>
         </div>
         <div class="hero-side">
-          <div class="big" id="heroRound">Spieltag 6</div>
+          <div class="big" id="heroRound">–</div>
           <div class="lbl">Aktueller Stand</div>
           <div class="rule"></div>
-          <div class="small" id="heroSub">8 Teams &middot; 48 Spiele gespielt<br>Stand 21:42 Uhr</div>
+          <div class="small" id="heroSub">Lade Daten …</div>
         </div>
       </div>
 
@@ -84,19 +89,20 @@
 
     <section class="view" id="view-team" aria-labelledby="title-team" hidden>
       <div class="team-hero" id="teamHero"></div>
-      <div class="section-top">
-        <h2>Spiele</h2>
-        <span class="section-meta" id="teamGameMeta"></span>
+      <div id="teamBody">
+        <div class="section-top">
+          <h2>Spiele</h2>
+          <span class="section-meta" id="teamGameMeta"></span>
+        </div>
+        <div id="teamGames" class="match-list"></div>
+        <p class="team-back"><a href="#tabelle">&larr; Zur&uuml;ck zur Tabelle</a></p>
       </div>
-      <div id="teamGames" class="match-list"></div>
-      <p class="team-back"><a href="#tabelle">&larr; Zur&uuml;ck zur Tabelle</a></p>
     </section>
 
     <section class="view" id="view-modus" aria-labelledby="title-modus" hidden>
       <div class="page-hero">
         <p class="eyebrow" data-league-meta>TVE Fall League &middot; Saison 2026/27</p>
         <h1 id="title-modus">Modus &amp; Teams</h1>
-        <p class="lede">Alles Wichtige zum Ablauf der Saison.</p>
       </div>
 
       <div class="section-top">
@@ -111,13 +117,12 @@
         <span class="section-meta" id="teamCount"></span>
       </div>
       <div class="team-grid" id="teamGrid"></div>
-      <p class="privacy">Hinweis: Auf einer &ouml;ffentlich erreichbaren Seite besser nur Vornamen, Initialen oder Nicknames ver&ouml;ffentlichen.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span class="status"><span class="dot demo" id="statusDot"></span><span id="dataStatus">Demo-Daten</span></span>
+      <span class="status"><span class="dot demo" id="statusDot"></span><span id="dataStatus">Lade Daten …</span></span>
       <span id="updatedAt"></span>
       <span class="footer-brand" id="footerBrand">TVE Fall League</span>
     </div>

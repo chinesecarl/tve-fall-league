@@ -3,7 +3,7 @@
 /* =========================================================
    Konfiguration
    Hier die vier CSV-Links aus Google Sheets eintragen.
-   Leere Links bedeuten: Demo-Daten werden angezeigt.
+   Leere Links bedeuten: Beispieldaten werden angezeigt.
    ========================================================= */
 const CONFIG = {
   teamsUrl: "",
@@ -18,7 +18,7 @@ const DEFAULT_SETTINGS = {
   league_name: "TVE Fall League",
   season: "2026/27",
   modus_1: "5vs5",
-  modus_2: "35 Min games",
+  modus_2: "35 Minuten pro Spiel",
   stallcount: "8",
   timeouts: "2 Timeouts pro Team à 1 min",
   cap_mode: "Cap One",
@@ -27,7 +27,7 @@ const DEFAULT_SETTINGS = {
   spiel_1_ende: "21:20",
   spiel_2_start: "21:30",
   spiel_2_ende: "22:05",
-  format_note: "Ersten 5 Wochen · 8 Teams auf 4 Feldern · Round Robin x2"
+  format_note: "7 Spieltage · 8 Teams auf 4 Feldern · 2 Spiele pro Team"
 };
 
 const DEMO_TEAMS = [
@@ -246,12 +246,6 @@ function formatDiff(value) {
 
 function formatTime(date) {
   return date.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
-}
-
-function joinDe(items) {
-  if (!items.length) return "";
-  if (items.length === 1) return items[0];
-  return `${items.slice(0, -1).join(", ")} und ${items[items.length - 1]}`;
 }
 
 function timeRange(start, end) {
@@ -576,7 +570,7 @@ function computeStandings() {
 
 function roundNumbers() {
   const highestMatchRound = state.matches.reduce((max, match) => Math.max(max, match.round || 0), 0);
-  const highest = Math.max(14, highestMatchRound, state.round || 0);
+  const highest = Math.max(1, highestMatchRound, state.round || 0);
   return Array.from({ length: highest }, (_, index) => index + 1);
 }
 
@@ -606,8 +600,15 @@ function parseRoute() {
   const hash = location.hash.replace(/^#/, "");
 
   if (hash.startsWith("team/")) {
-    const teamId = decodeURIComponent(hash.slice(5)).toUpperCase();
-    return { tab: "team", teamId: teamId || null };
+    let teamId = "";
+    try {
+      teamId = decodeURIComponent(hash.slice(5)).trim().toUpperCase();
+    } catch {
+      teamId = "";
+    }
+    return teamId
+      ? { tab: "team", teamId }
+      : { tab: "tabelle", teamId: null };
   }
 
   return { tab: TABS.includes(hash) ? hash : "tabelle", teamId: null };
@@ -656,26 +657,11 @@ function renderNotice() {
   let text = "";
 
   if (state.demo.blocked) {
-    text = "Keine Daten verfügbar. Bitte die CSV-Links prüfen und die Seite neu laden.";
-  } else {
-    const parts = [];
-
-    if (state.demo.missingLabels.length) {
-      const labels = joinDe(state.demo.missingLabels);
-      parts.push(
-        `Für ${labels} ${state.demo.missingLabels.length === 1 ? "fehlt" : "fehlen"} noch ` +
-        `${state.demo.missingLabels.length === 1 ? "der CSV-Link" : "die CSV-Links"}.`
-      );
-    }
-
-    if (state.demo.failed.length) {
-      const labels = joinDe(state.demo.failed);
-      parts.push(`${labels} konnten nicht geladen werden.`);
-    }
-
-    if (parts.length) {
-      text = `Demo-Modus: ${parts.join(" ")} Es werden Beispieldaten angezeigt.`;
-    }
+    text = "Keine Daten verfügbar. Bitte später erneut laden.";
+  } else if (state.demo.failed.length) {
+    text = "Vorschau: Die Live-Daten konnten nicht geladen werden. Es werden Beispieldaten angezeigt.";
+  } else if (state.demo.missingLabels.length) {
+    text = "Vorschau: Es werden Beispieldaten angezeigt. Die echten Ergebnisse folgen.";
   }
 
   element.textContent = text;
@@ -690,12 +676,12 @@ function renderTabelle() {
   $("#heroRound").textContent = latest ? `Spieltag ${latest}` : "Saisonstart";
   $("#heroSub").innerHTML =
     `${state.teams.length} Teams · ${finished.length} ${finished.length === 1 ? "Spiel" : "Spiele"} gespielt` +
-    `<br>Stand ${escapeHtml(updated)} Uhr`;
+    `<br>Aktualisiert ${escapeHtml(updated)} Uhr`;
 
   const host = $("#standings");
 
   if (!state.teams.length && !state.matches.length) {
-    host.innerHTML = emptyState("Noch keine Teams hinterlegt", "Sobald die Teams im Google Sheet stehen, erscheinen sie hier.");
+    host.innerHTML = emptyState("Noch keine Teams hinterlegt", "Sobald die Teams eingetragen sind, erscheinen sie hier.");
     renderDailyQuote();
     return;
   }
@@ -856,14 +842,22 @@ function renderTeam() {
 
   const host = $("#teamHero");
   const gamesHost = $("#teamGames");
+  const body = $("#teamBody");
   const team = state.teams.find(candidate => candidate.id === state.teamId);
 
   if (!team) {
-    host.innerHTML = emptyState("Team nicht gefunden", "Dieses Team steht nicht in der Teamliste.");
+    body.hidden = true;
+    host.innerHTML = `
+      <a class="back-link" href="#tabelle">&larr; Tabelle</a>
+      <h1 id="title-team" class="team-missing-title">Team nicht gefunden</h1>
+      <p class="empty-note">Dieses Team steht nicht in der Teamliste.</p>
+    `;
     gamesHost.innerHTML = "";
     $("#teamGameMeta").textContent = "";
     return;
   }
+
+  body.hidden = false;
 
   const standings = computeStandings();
   const rank = standings.findIndex(row => row.team.id === team.id);
@@ -949,7 +943,7 @@ function renderModus() {
   $("#teamCount").textContent = state.teams.length ? `${state.teams.length} Teams` : "";
 
   if (!state.teams.length) {
-    $("#teamGrid").innerHTML = emptyState("Noch keine Teams hinterlegt", "Sobald die Teams im Google Sheet stehen, erscheinen sie hier.");
+    $("#teamGrid").innerHTML = emptyState("Noch keine Teams hinterlegt", "Sobald die Teams eingetragen sind, erscheinen sie hier.");
     return;
   }
 
@@ -1003,14 +997,14 @@ function emptyState(title, text) {
 
 function renderFooter() {
   const labels = {
-    live: "Live aus Google Sheets",
-    demo: "Demo-Daten",
+    live: "Aktuell",
+    demo: "Vorschau",
     error: "Keine Daten"
   };
 
-  $("#dataStatus").textContent = labels[state.status] || "Demo-Daten";
+  $("#dataStatus").textContent = labels[state.status] || "Vorschau";
   $("#statusDot").className = `dot ${state.status}`;
-  $("#updatedAt").textContent = state.updatedAt ? `Stand ${formatTime(state.updatedAt)} Uhr` : "";
+  $("#updatedAt").textContent = state.updatedAt ? `Aktualisiert ${formatTime(state.updatedAt)} Uhr` : "";
   $("#footerBrand").textContent = state.settings.league_name || "TVE Fall League";
 }
 
