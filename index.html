@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TVE Fall League – Tabelle</title>
+  <meta name="description" content="Tabelle, Spieltage und Modus der TVE Fall League. Ergebnisse werden automatisch aus einem Google Sheet geladen.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f6f1e8'/%3E%3Crect x='8' y='8' width='48' height='48' fill='none' stroke='%23211d17' stroke-width='2'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='24' fill='%23211d17' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#tabelle" aria-label="TVE Fall League – zur Tabelle">
+        <span class="brand-mark" aria-hidden="true">TVE</span>
+        <span class="brand-text">
+          <strong id="brandName">TVE Fall League</strong>
+          <span id="brandSeason">Saison 2026/27</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="#tabelle" data-tab="tabelle">Tabelle</a>
+        <a href="#spieltage" data-tab="spieltage">Spieltage</a>
+        <a href="#modus" data-tab="modus">Modus &amp; Teams</a>
+      </nav>
+
+      <button class="refresh" id="refreshBtn" type="button" aria-label="Daten aktualisieren" title="Daten aktualisieren">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 11a8 8 0 1 0-2.35 5.65"></path>
+          <path d="M20 4v7h-7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div id="notice" class="notice" hidden></div>
+
+    <section class="view" id="view-tabelle" aria-labelledby="title-tabelle">
+      <div class="hero">
+        <div class="hero-intro">
+          <p class="eyebrow" data-league-meta>TVE Fall League &middot; Saison 2026/27</p>
+          <h1 id="title-tabelle">Tabelle</h1>
+        </div>
+        <div class="hero-side">
+          <div class="big" id="heroRound">Spieltag 6</div>
+          <div class="lbl">Aktueller Stand</div>
+          <div class="rule"></div>
+          <div class="small" id="heroSub">8 Teams &middot; 48 Spiele gespielt<br>Stand 21:42 Uhr</div>
+        </div>
+      </div>
+
+      <div class="section-top">
+        <h2>Rangliste</h2>
+        <span class="section-meta">Siege &middot; Differenz &middot; erzielte Punkte</span>
+      </div>
+      <div id="standings" class="standings-wrap"></div>
+      <p class="foot-note">S = Siege, N = Niederlagen, Diff = Punktedifferenz. Bei Gleichstand entscheiden erzielte Punkte und der Teamname. Team antippen &ouml;ffnet alle Spiele.</p>
+
+      <figure class="daily-quote" id="dailyQuote" hidden>
+        <blockquote id="dailyQuoteText"></blockquote>
+        <figcaption id="dailyQuoteBy"></figcaption>
+      </figure>
+    </section>
+
+    <section class="view" id="view-spieltage" aria-labelledby="title-spieltage" hidden>
+      <h1 class="sr-only" id="title-spieltage">Spieltage</h1>
+
+      <div class="section-top schedule-top">
+        <h2>Spieltag w&auml;hlen</h2>
+        <span class="section-meta" id="roundCount"></span>
+      </div>
+      <div class="round-bar" id="roundChips" role="group" aria-label="Spieltag ausw&auml;hlen"></div>
+
+      <div class="round-head">
+        <h2 id="roundTitle">Spieltag 1</h2>
+        <span class="round-meta" id="roundMeta"></span>
+      </div>
+      <div id="roundMatches" class="match-list"></div>
+    </section>
+
+    <section class="view" id="view-team" aria-labelledby="title-team" hidden>
+      <div class="team-hero" id="teamHero"></div>
+      <div class="section-top">
+        <h2>Spiele</h2>
+        <span class="section-meta" id="teamGameMeta"></span>
+      </div>
+      <div id="teamGames" class="match-list"></div>
+      <p class="team-back"><a href="#tabelle">&larr; Zur&uuml;ck zur Tabelle</a></p>
+    </section>
+
+    <section class="view" id="view-modus" aria-labelledby="title-modus" hidden>
+      <div class="page-hero">
+        <p class="eyebrow" data-league-meta>TVE Fall League &middot; Saison 2026/27</p>
+        <h1 id="title-modus">Modus &amp; Teams</h1>
+        <p class="lede">Alles Wichtige zum Ablauf der Saison.</p>
+      </div>
+
+      <div class="section-top">
+        <h2>Modus</h2>
+        <span class="section-meta" id="modeMeta">Saison 2026/27</span>
+      </div>
+      <dl class="facts" id="modeFacts"></dl>
+      <p class="format-note" id="formatNote" hidden></p>
+
+      <div class="section-top teams-top">
+        <h2>Teams</h2>
+        <span class="section-meta" id="teamCount"></span>
+      </div>
+      <div class="team-grid" id="teamGrid"></div>
+      <p class="privacy">Hinweis: Auf einer &ouml;ffentlich erreichbaren Seite besser nur Vornamen, Initialen oder Nicknames ver&ouml;ffentlichen.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span class="status"><span class="dot demo" id="statusDot"></span><span id="dataStatus">Demo-Daten</span></span>
+      <span id="updatedAt"></span>
+      <span class="footer-brand" id="footerBrand">TVE Fall League</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
