@@ -3,7 +3,7 @@
 /* =========================================================
    Konfiguration
    Hier die vier CSV-Links aus Google Sheets eintragen.
-   Leere Links bedeuten: Beispieldaten werden angezeigt.
+   Leere Links bedeuten: eingebaute Ligadaten werden angezeigt.
    ========================================================= */
 const CONFIG = {
   teamsUrl: "",
@@ -30,7 +30,7 @@ const DEFAULT_SETTINGS = {
   format_note: "7 Spieltage · 8 Teams auf 4 Feldern · 2 Spiele pro Team"
 };
 
-const DEMO_TEAMS = [
+const LEAGUE_TEAMS = [
   { team_id: "TU", name: "Tuatara", short: "TU", color: "#0ea5e9" },
   { team_id: "AL", name: "Albatros", short: "AL", color: "#64748b" },
   { team_id: "WI", name: "Wisent", short: "WI", color: "#92400e" },
@@ -41,61 +41,61 @@ const DEMO_TEAMS = [
   { team_id: "KA", name: "Känguru", short: "KA", color: "#16a34a" }
 ];
 
-const DEMO_MATCHES = [
-  { match_id: "R01G1", round: 1, game_no: 1, home_team_id: "TU", away_team_id: "AL", home_score: 11, away_score: 7, status: "finished" },
-  { match_id: "R01G2", round: 1, game_no: 2, home_team_id: "WI", away_team_id: "KA", home_score: 13, away_score: 5, status: "finished" },
-  { match_id: "R01G3", round: 1, game_no: 3, home_team_id: "BI", away_team_id: "WB", home_score: 6, away_score: 10, status: "finished" },
-  { match_id: "R01G4", round: 1, game_no: 4, home_team_id: "GI", away_team_id: "AB", home_score: 8, away_score: 9, status: "finished" },
-  { match_id: "R01G5", round: 1, game_no: 5, home_team_id: "BI", away_team_id: "TU", home_score: 9, away_score: 12, status: "finished" },
-  { match_id: "R01G6", round: 1, game_no: 6, home_team_id: "GI", away_team_id: "AL", home_score: 10, away_score: 7, status: "finished" },
-  { match_id: "R01G7", round: 1, game_no: 7, home_team_id: "WB", away_team_id: "WI", home_score: 8, away_score: 11, status: "finished" },
-  { match_id: "R01G8", round: 1, game_no: 8, home_team_id: "AB", away_team_id: "KA", home_score: 12, away_score: 6, status: "finished" },
-  { match_id: "R02G1", round: 2, game_no: 1, home_team_id: "TU", away_team_id: "KA", home_score: 12, away_score: 4, status: "finished" },
-  { match_id: "R02G2", round: 2, game_no: 2, home_team_id: "AL", away_team_id: "WI", home_score: 6, away_score: 11, status: "finished" },
-  { match_id: "R02G3", round: 2, game_no: 3, home_team_id: "BI", away_team_id: "GI", home_score: 10, away_score: 8, status: "finished" },
-  { match_id: "R02G4", round: 2, game_no: 4, home_team_id: "WB", away_team_id: "AB", home_score: 9, away_score: 7, status: "finished" },
-  { match_id: "R02G5", round: 2, game_no: 5, home_team_id: "GI", away_team_id: "TU", home_score: 8, away_score: 13, status: "finished" },
-  { match_id: "R02G6", round: 2, game_no: 6, home_team_id: "WB", away_team_id: "AL", home_score: 12, away_score: 6, status: "finished" },
-  { match_id: "R02G7", round: 2, game_no: 7, home_team_id: "AB", away_team_id: "WI", home_score: 5, away_score: 10, status: "finished" },
-  { match_id: "R02G8", round: 2, game_no: 8, home_team_id: "KA", away_team_id: "BI", home_score: 9, away_score: 11, status: "finished" },
-  { match_id: "R03G1", round: 3, game_no: 1, home_team_id: "TU", away_team_id: "WI", home_score: 9, away_score: 8, status: "finished" },
-  { match_id: "R03G2", round: 3, game_no: 2, home_team_id: "AL", away_team_id: "KA", home_score: 11, away_score: 6, status: "finished" },
-  { match_id: "R03G3", round: 3, game_no: 3, home_team_id: "BI", away_team_id: "AB", home_score: 7, away_score: 9, status: "finished" },
-  { match_id: "R03G4", round: 3, game_no: 4, home_team_id: "GI", away_team_id: "WB", home_score: 6, away_score: 12, status: "finished" },
-  { match_id: "R03G5", round: 3, game_no: 5, home_team_id: "WB", away_team_id: "TU", home_score: 10, away_score: 8, status: "finished" },
-  { match_id: "R03G6", round: 3, game_no: 6, home_team_id: "AB", away_team_id: "AL", home_score: 9, away_score: 7, status: "finished" },
-  { match_id: "R03G7", round: 3, game_no: 7, home_team_id: "BI", away_team_id: "WI", home_score: 5, away_score: 12, status: "finished" },
-  { match_id: "R03G8", round: 3, game_no: 8, home_team_id: "KA", away_team_id: "GI", home_score: 10, away_score: 9, status: "finished" },
-  { match_id: "R04G1", round: 4, game_no: 1, home_team_id: "TU", away_team_id: "BI", home_score: 12, away_score: 6, status: "finished" },
-  { match_id: "R04G2", round: 4, game_no: 2, home_team_id: "AL", away_team_id: "GI", home_score: 9, away_score: 8, status: "finished" },
-  { match_id: "R04G3", round: 4, game_no: 3, home_team_id: "WI", away_team_id: "WB", home_score: 10, away_score: 7, status: "finished" },
-  { match_id: "R04G4", round: 4, game_no: 4, home_team_id: "KA", away_team_id: "AB", home_score: 8, away_score: 11, status: "finished" },
-  { match_id: "R04G5", round: 4, game_no: 5, home_team_id: "AB", away_team_id: "TU", home_score: 7, away_score: 10, status: "finished" },
-  { match_id: "R04G6", round: 4, game_no: 6, home_team_id: "BI", away_team_id: "AL", home_score: 11, away_score: 6, status: "finished" },
-  { match_id: "R04G7", round: 4, game_no: 7, home_team_id: "GI", away_team_id: "WI", home_score: 6, away_score: 13, status: "finished" },
-  { match_id: "R04G8", round: 4, game_no: 8, home_team_id: "KA", away_team_id: "WB", home_score: 4, away_score: 12, status: "finished" },
-  { match_id: "R05G1", round: 5, game_no: 1, home_team_id: "TU", away_team_id: "GI", home_score: 11, away_score: 6, status: "finished" },
-  { match_id: "R05G2", round: 5, game_no: 2, home_team_id: "AL", away_team_id: "WB", home_score: 5, away_score: 10, status: "finished" },
-  { match_id: "R05G3", round: 5, game_no: 3, home_team_id: "WI", away_team_id: "AB", home_score: 12, away_score: 7, status: "finished" },
-  { match_id: "R05G4", round: 5, game_no: 4, home_team_id: "BI", away_team_id: "KA", home_score: 10, away_score: 5, status: "finished" },
-  { match_id: "R05G5", round: 5, game_no: 5, home_team_id: "AL", away_team_id: "TU", home_score: 8, away_score: 11, status: "finished" },
-  { match_id: "R05G6", round: 5, game_no: 6, home_team_id: "KA", away_team_id: "WI", home_score: 7, away_score: 12, status: "finished" },
-  { match_id: "R05G7", round: 5, game_no: 7, home_team_id: "WB", away_team_id: "BI", home_score: 9, away_score: 6, status: "finished" },
-  { match_id: "R05G8", round: 5, game_no: 8, home_team_id: "AB", away_team_id: "GI", home_score: 11, away_score: 8, status: "finished" },
-  { match_id: "R06G1", round: 6, game_no: 1, home_team_id: "TU", away_team_id: "WB", home_score: 8, away_score: 10, status: "finished" },
-  { match_id: "R06G2", round: 6, game_no: 2, home_team_id: "AL", away_team_id: "AB", home_score: 7, away_score: 9, status: "finished" },
-  { match_id: "R06G3", round: 6, game_no: 3, home_team_id: "WI", away_team_id: "BI", home_score: 11, away_score: 5, status: "finished" },
-  { match_id: "R06G4", round: 6, game_no: 4, home_team_id: "GI", away_team_id: "KA", home_score: 9, away_score: 7, status: "finished" },
-  { match_id: "R06G5", round: 6, game_no: 5, home_team_id: "KA", away_team_id: "TU", home_score: 6, away_score: 12, status: "finished" },
-  { match_id: "R06G6", round: 6, game_no: 6, home_team_id: "WI", away_team_id: "AL", home_score: 12, away_score: 6, status: "finished" },
-  { match_id: "R06G7", round: 6, game_no: 7, home_team_id: "GI", away_team_id: "BI", home_score: 7, away_score: 10, status: "finished" },
-  { match_id: "R06G8", round: 6, game_no: 8, home_team_id: "AB", away_team_id: "WB", home_score: 6, away_score: 9, status: "finished" },
-  { match_id: "R07G1", round: 7, game_no: 1, home_team_id: "TU", away_team_id: "AB", home_score: null, away_score: null, status: "scheduled" },
+const LEAGUE_MATCHES = [
+{ match_id: "R01G1", round: 1, game_no: 1, home_team_id: "KA", away_team_id: "TU", home_score: 6, away_score: 8, status: "finished" },
+  { match_id: "R01G2", round: 1, game_no: 2, home_team_id: "AL", away_team_id: "AB", home_score: 4, away_score: 7, status: "finished" },
+  { match_id: "R01G3", round: 1, game_no: 3, home_team_id: "WI", away_team_id: "WB", home_score: 11, away_score: 3, status: "finished" },
+  { match_id: "R01G4", round: 1, game_no: 4, home_team_id: "BI", away_team_id: "GI", home_score: 9, away_score: 8, status: "finished" },
+  { match_id: "R01G5", round: 1, game_no: 5, home_team_id: "TU", away_team_id: "AB", home_score: 4, away_score: 8, status: "finished" },
+  { match_id: "R01G6", round: 1, game_no: 6, home_team_id: "KA", away_team_id: "WB", home_score: 7, away_score: 9, status: "finished" },
+  { match_id: "R01G7", round: 1, game_no: 7, home_team_id: "AL", away_team_id: "GI", home_score: 7, away_score: 5, status: "finished" },
+  { match_id: "R01G8", round: 1, game_no: 8, home_team_id: "WI", away_team_id: "BI", home_score: 9, away_score: 3, status: "finished" },
+  { match_id: "R02G1", round: 2, game_no: 1, home_team_id: "WB", away_team_id: "TU", home_score: 11, away_score: 6, status: "finished" },
+  { match_id: "R02G2", round: 2, game_no: 2, home_team_id: "AB", away_team_id: "GI", home_score: 4, away_score: 7, status: "finished" },
+  { match_id: "R02G3", round: 2, game_no: 3, home_team_id: "KA", away_team_id: "BI", home_score: 7, away_score: 8, status: "finished" },
+  { match_id: "R02G4", round: 2, game_no: 4, home_team_id: "AL", away_team_id: "WI", home_score: 7, away_score: 10, status: "finished" },
+  { match_id: "R02G5", round: 2, game_no: 5, home_team_id: "TU", away_team_id: "GI", home_score: 11, away_score: 9, status: "finished" },
+  { match_id: "R02G6", round: 2, game_no: 6, home_team_id: "WB", away_team_id: "BI", home_score: 9, away_score: 6, status: "finished" },
+  { match_id: "R02G7", round: 2, game_no: 7, home_team_id: "AB", away_team_id: "WI", home_score: 6, away_score: 11, status: "finished" },
+  { match_id: "R02G8", round: 2, game_no: 8, home_team_id: "KA", away_team_id: "AL", home_score: 7, away_score: 10, status: "finished" },
+  { match_id: "R03G1", round: 3, game_no: 1, home_team_id: "BI", away_team_id: "TU", home_score: 10, away_score: 11, status: "finished" },
+  { match_id: "R03G2", round: 3, game_no: 2, home_team_id: "GI", away_team_id: "WI", home_score: 7, away_score: 9, status: "finished" },
+  { match_id: "R03G3", round: 3, game_no: 3, home_team_id: "WB", away_team_id: "AL", home_score: 12, away_score: 5, status: "finished" },
+  { match_id: "R03G4", round: 3, game_no: 4, home_team_id: "AB", away_team_id: "KA", home_score: 10, away_score: 6, status: "finished" },
+  { match_id: "R03G5", round: 3, game_no: 5, home_team_id: "TU", away_team_id: "WI", home_score: 8, away_score: 7, status: "finished" },
+  { match_id: "R03G6", round: 3, game_no: 6, home_team_id: "BI", away_team_id: "AL", home_score: 7, away_score: 6, status: "finished" },
+  { match_id: "R03G7", round: 3, game_no: 7, home_team_id: "GI", away_team_id: "KA", home_score: 7, away_score: 10, status: "finished" },
+  { match_id: "R03G8", round: 3, game_no: 8, home_team_id: "WB", away_team_id: "AB", home_score: 9, away_score: 7, status: "finished" },
+  { match_id: "R04G1", round: 4, game_no: 1, home_team_id: "AL", away_team_id: "TU", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G2", round: 4, game_no: 2, home_team_id: "WI", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G3", round: 4, game_no: 3, home_team_id: "BI", away_team_id: "AB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G4", round: 4, game_no: 4, home_team_id: "GI", away_team_id: "WB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G5", round: 4, game_no: 5, home_team_id: "TU", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G6", round: 4, game_no: 6, home_team_id: "AB", away_team_id: "AL", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G7", round: 4, game_no: 7, home_team_id: "WB", away_team_id: "WI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R04G8", round: 4, game_no: 8, home_team_id: "GI", away_team_id: "BI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G1", round: 5, game_no: 1, home_team_id: "AB", away_team_id: "TU", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G2", round: 5, game_no: 2, home_team_id: "WB", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G3", round: 5, game_no: 3, home_team_id: "GI", away_team_id: "AL", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G4", round: 5, game_no: 4, home_team_id: "BI", away_team_id: "WI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G5", round: 5, game_no: 5, home_team_id: "TU", away_team_id: "WB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G6", round: 5, game_no: 6, home_team_id: "GI", away_team_id: "AB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G7", round: 5, game_no: 7, home_team_id: "BI", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R05G8", round: 5, game_no: 8, home_team_id: "WI", away_team_id: "AL", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G1", round: 6, game_no: 1, home_team_id: "GI", away_team_id: "TU", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G2", round: 6, game_no: 2, home_team_id: "BI", away_team_id: "WB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G3", round: 6, game_no: 3, home_team_id: "WI", away_team_id: "AB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G4", round: 6, game_no: 4, home_team_id: "AL", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G5", round: 6, game_no: 5, home_team_id: "TU", away_team_id: "BI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G6", round: 6, game_no: 6, home_team_id: "WI", away_team_id: "GI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G7", round: 6, game_no: 7, home_team_id: "AL", away_team_id: "WB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R06G8", round: 6, game_no: 8, home_team_id: "KA", away_team_id: "AB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R07G1", round: 7, game_no: 1, home_team_id: "WI", away_team_id: "TU", home_score: null, away_score: null, status: "scheduled" },
   { match_id: "R07G2", round: 7, game_no: 2, home_team_id: "AL", away_team_id: "BI", home_score: null, away_score: null, status: "scheduled" },
-  { match_id: "R07G3", round: 7, game_no: 3, home_team_id: "WI", away_team_id: "GI", home_score: null, away_score: null, status: "scheduled" },
-  { match_id: "R07G4", round: 7, game_no: 4, home_team_id: "WB", away_team_id: "KA", home_score: null, away_score: null, status: "scheduled" },
-  { match_id: "R07G5", round: 7, game_no: 5, home_team_id: "WI", away_team_id: "TU", home_score: null, away_score: null, status: "scheduled" },
-  { match_id: "R07G6", round: 7, game_no: 6, home_team_id: "KA", away_team_id: "AL", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R07G3", round: 7, game_no: 3, home_team_id: "KA", away_team_id: "GI", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R07G4", round: 7, game_no: 4, home_team_id: "AB", away_team_id: "WB", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R07G5", round: 7, game_no: 5, home_team_id: "TU", away_team_id: "AL", home_score: null, away_score: null, status: "scheduled" },
+  { match_id: "R07G6", round: 7, game_no: 6, home_team_id: "KA", away_team_id: "WI", home_score: null, away_score: null, status: "scheduled" },
   { match_id: "R07G7", round: 7, game_no: 7, home_team_id: "AB", away_team_id: "BI", home_score: null, away_score: null, status: "scheduled" },
   { match_id: "R07G8", round: 7, game_no: 8, home_team_id: "WB", away_team_id: "GI", home_score: null, away_score: null, status: "scheduled" }
 ];
@@ -170,8 +170,8 @@ const TEAM_QUOTES = {
 };
 
 
-const DEMO_PLAYERS = [];
-const DEMO_SETTINGS_ROWS = Object.entries(DEFAULT_SETTINGS).map(([key, value]) => ({ key, value }));
+const LEAGUE_PLAYERS = [];
+const LEAGUE_SETTINGS_ROWS = Object.entries(DEFAULT_SETTINGS).map(([key, value]) => ({ key, value }));
 
 const STATUS = {
   finished: { label: "Endstand", cls: "is-finished" },
@@ -194,7 +194,7 @@ const state = {
   roundTouched: false,
   loading: false,
   updatedAt: null,
-  status: "demo",
+  status: "local",
   demo: { missingLabels: [], failed: [], blocked: false }
 };
 
@@ -395,10 +395,10 @@ async function loadData() {
 
   try {
     const jobs = [
-      { key: "teams", label: "Teams", url: CONFIG.teamsUrl, demo: DEMO_TEAMS },
-      { key: "matches", label: "Spiele", url: CONFIG.matchesUrl, demo: DEMO_MATCHES },
-      { key: "players", label: "Spieler", url: CONFIG.playersUrl, demo: DEMO_PLAYERS },
-      { key: "settings", label: "Einstellungen", url: CONFIG.settingsUrl, demo: DEMO_SETTINGS_ROWS }
+      { key: "teams", label: "Teams", url: CONFIG.teamsUrl, demo: LEAGUE_TEAMS },
+      { key: "matches", label: "Spiele", url: CONFIG.matchesUrl, demo: LEAGUE_MATCHES },
+      { key: "players", label: "Spieler", url: CONFIG.playersUrl, demo: LEAGUE_PLAYERS },
+      { key: "settings", label: "Einstellungen", url: CONFIG.settingsUrl, demo: LEAGUE_SETTINGS_ROWS }
     ];
 
     const results = await Promise.all(jobs.map(loadJob));
@@ -423,32 +423,38 @@ async function loadData() {
     const playerRows = pick("players");
     const settingsRows = pick("settings");
 
-    const pairUsesDemo = byKey.teams.demo || byKey.matches.demo;
+    const pairUsesLocal = byKey.teams.demo || byKey.matches.demo;
 
-    if (pairUsesDemo && allowDemo) {
-      state.teams = normalizeTeams(DEMO_TEAMS);
-      state.matches = normalizeMatches(DEMO_MATCHES);
-      state.players = normalizePlayers(DEMO_PLAYERS);
+    if (pairUsesLocal && allowDemo) {
+      state.teams = normalizeTeams(LEAGUE_TEAMS);
+      state.matches = normalizeMatches(LEAGUE_MATCHES);
+      state.players = normalizePlayers(LEAGUE_PLAYERS);
     } else {
       state.teams = normalizeTeams(teamRows);
       state.matches = normalizeMatches(matchRows);
       state.players = normalizePlayers(playerRows);
     }
 
-    state.settings = normalizeSettings(settingsRows.length ? settingsRows : DEMO_SETTINGS_ROWS);
+    state.settings = normalizeSettings(settingsRows.length ? settingsRows : LEAGUE_SETTINGS_ROWS);
 
     const missingLabels = ["teams", "matches"]
       .filter(key => byKey[key].reason === "missing")
       .map(key => byKey[key].job.label);
 
-    const usedDemo = pairUsesDemo && allowDemo;
+    const hasLiveSources = isHttp(CONFIG.teamsUrl) && isHttp(CONFIG.matchesUrl);
 
     state.demo = {
       missingLabels,
       failed: failedLabels,
       blocked: !allowDemo && (missingLabels.length > 0 || failedLabels.length > 0)
     };
-    state.status = state.demo.blocked ? "error" : usedDemo ? "demo" : "live";
+    state.status = state.demo.blocked
+      ? "error"
+      : failedLabels.length
+        ? "demo"
+        : hasLiveSources
+          ? "live"
+          : "local";
     state.updatedAt = new Date();
 
     if (state.round === null || !state.roundTouched) state.round = defaultRound();
@@ -659,9 +665,7 @@ function renderNotice() {
   if (state.demo.blocked) {
     text = "Keine Daten verfügbar. Bitte später erneut laden.";
   } else if (state.demo.failed.length) {
-    text = "Vorschau: Die Live-Daten konnten nicht geladen werden. Es werden Beispieldaten angezeigt.";
-  } else if (state.demo.missingLabels.length) {
-    text = "Vorschau: Es werden Beispieldaten angezeigt. Die echten Ergebnisse folgen.";
+    text = "Live-Daten nicht erreichbar. Es wird der letzte Stand angezeigt.";
   }
 
   element.textContent = text;
@@ -997,12 +1001,13 @@ function emptyState(title, text) {
 
 function renderFooter() {
   const labels = {
-    live: "Aktuell",
-    demo: "Vorschau",
+    live: "Live",
+    local: "Aktuell",
+    demo: "Letzter Stand",
     error: "Keine Daten"
   };
 
-  $("#dataStatus").textContent = labels[state.status] || "Vorschau";
+  $("#dataStatus").textContent = labels[state.status] || "Aktuell";
   $("#statusDot").className = `dot ${state.status}`;
   $("#updatedAt").textContent = state.updatedAt ? `Aktualisiert ${formatTime(state.updatedAt)} Uhr` : "";
   $("#footerBrand").textContent = state.settings.league_name || "TVE Fall League";

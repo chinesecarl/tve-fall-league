@@ -396,6 +396,7 @@ a.match-team:hover{color:var(--rust);border-bottom-color:var(--rust)}
 .status{display:inline-flex;align-items:center}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:7px;background:var(--muted)}
 .dot.live{background:var(--green)}
+.dot.local{background:var(--green)}
 .dot.demo{background:var(--rust)}
 .dot.error{background:var(--danger)}
 .footer-brand{margin-left:auto}
