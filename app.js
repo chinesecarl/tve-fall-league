@@ -516,6 +516,67 @@ function teamById(id) {
   };
 }
 
+function headToHeadStats(group) {
+  const ids = new Set(group.map(row => row.team.id));
+  const stats = new Map(group.map(row => [row.team.id, { wins: 0, diff: 0, scored: 0 }]));
+
+  getFinishedMatches().forEach(match => {
+    const home = clean(match.home).toUpperCase();
+    const away = clean(match.away).toUpperCase();
+    if (!ids.has(home) || !ids.has(away)) return;
+
+    const homeStats = stats.get(home);
+    const awayStats = stats.get(away);
+
+    homeStats.scored += match.homeScore;
+    awayStats.scored += match.awayScore;
+    homeStats.diff += match.homeScore - match.awayScore;
+    awayStats.diff += match.awayScore - match.homeScore;
+
+    if (match.homeScore > match.awayScore) homeStats.wins += 1;
+    else if (match.awayScore > match.homeScore) awayStats.wins += 1;
+  });
+
+  return stats;
+}
+
+function rankTiedGroup(group) {
+  if (group.length < 2) return group;
+
+  const headToHead = headToHeadStats(group);
+  const stat = row => headToHead.get(row.team.id);
+
+  // DFV B.2: Kriterien der Reihe nach auf die ganze Gruppe anwenden. Bleibt eine
+  // Untergruppe gleichauf, wird sie nur mit den Spielen untereinander neu bewertet.
+  const criteria = [
+    row => stat(row).wins,
+    row => stat(row).diff,
+    row => row.diff,
+    row => stat(row).scored,
+    row => row.scored
+  ];
+
+  for (const criterion of criteria) {
+    const buckets = new Map();
+
+    group.forEach(row => {
+      const value = criterion(row);
+      if (!buckets.has(value)) buckets.set(value, []);
+      buckets.get(value).push(row);
+    });
+
+    if (buckets.size === 1) continue;
+
+    return [...buckets.keys()]
+      .sort((a, b) => b - a)
+      .flatMap(value => rankTiedGroup(buckets.get(value)));
+  }
+
+  return [...group].sort((a, b) =>
+    a.team.name.localeCompare(b.team.name, "de", { sensitivity: "base" })
+  );
+}
+
 function computeStandings() {
   const rows = new Map();
 
@@ -564,14 +625,19 @@ function computeStandings() {
     }
   });
 
-  return [...rows.values()]
-    .map(row => ({ ...row, diff: row.scored - row.against }))
-    .sort((a, b) =>
-      b.wins - a.wins ||
-      b.diff - a.diff ||
-      b.scored - a.scored ||
-      a.team.name.localeCompare(b.team.name, "de", { sensitivity: "base" })
-    );
+  const ranked = [...rows.values()].map(row => ({ ...row, diff: row.scored - row.against }));
+  const groups = new Map();
+
+  ranked.forEach(row => {
+    if (!groups.has(row.wins)) groups.set(row.wins, []);
+    groups.get(row.wins).push(row);
+  });
+
+  // DFV-/WFDF-Rangfolge: Siege, dann direkter Vergleich der punktgleichen Teams,
+  // erst danach Gesamt-Punktedifferenz und erzielte Punkte.
+  return [...groups.keys()]
+    .sort((a, b) => b - a)
+    .flatMap(wins => rankTiedGroup(groups.get(wins)));
 }
 
 function roundNumbers() {
