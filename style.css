@@ -271,6 +271,7 @@ h1{
   font-size:14px;font-weight:600;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   border-bottom:1px solid transparent;
+  padding:5px 0;margin:-5px 0;
 }
 a.match-team:hover{color:var(--rust);border-bottom-color:var(--rust)}
 .match-side.loss .match-team{color:var(--muted);font-weight:500}
@@ -289,7 +290,7 @@ a.match-team:hover{color:var(--rust);border-bottom-color:var(--rust)}
   font-size:23px;line-height:1;font-variant-numeric:tabular-nums;
 }
 .match-score i{font-style:normal;font-size:17px;color:var(--soft);padding:0 5px}
-.match-score.is-empty{font-size:20px;color:var(--soft)}
+.match-score.is-empty{font-size:20px;color:var(--muted)}
 
 /* Modus & Teams */
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:6px}
@@ -475,7 +476,7 @@ a.match-team:hover{color:var(--rust);border-bottom-color:var(--rust)}
   .match-team{font-size:12.5px}
   .match-side{gap:6px}
   .match-side .swatch{width:6px;height:6px}
-  .match-label{font-size:7px;letter-spacing:.08em}
+  .match-label{font-size:8.5px;letter-spacing:.06em}
 
   #view-spieltage{padding-top:20px}
   .round-head{padding:14px 0 10px}

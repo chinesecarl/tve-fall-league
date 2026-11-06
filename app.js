@@ -592,6 +592,10 @@ function render() {
   state.tab = route.tab;
   state.teamId = route.teamId;
 
+  if (route.tab === "tabelle" && location.hash.startsWith("#team/")) {
+    history.replaceState(null, "", "#tabelle");
+  }
+
   showView();
   renderChrome();
   renderNotice();
@@ -654,7 +658,7 @@ function renderChrome() {
   });
 
   document.title = state.tab === "team"
-    ? `${league} – ${state.teams.find(team => team.id === state.teamId)?.name || "Team"}`
+    ? `${league} – ${state.teams.find(team => team.id === state.teamId)?.name || "Team nicht gefunden"}`
     : `${league} – ${TAB_TITLES[state.tab] || "Tabelle"}`;
 }
 
@@ -758,7 +762,7 @@ function renderSpieltage() {
   const matches = state.matches
     .filter(match => match.round === state.round)
     .sort(compareMatches);
-  const finished = matches.filter(match => match.status === "finished").length;
+  const finished = getFinishedMatches().filter(match => match.round === state.round).length;
 
   $("#roundMeta").textContent = matches.length
     ? `${matches.length} ${matches.length === 1 ? "Spiel" : "Spiele"}${finished ? ` · ${finished} gespielt` : ""}`
@@ -781,7 +785,9 @@ function matchRow(match) {
   const hasScore = match.status === "finished" && match.homeScore !== null && match.awayScore !== null;
   const homeWin = hasScore && match.homeScore > match.awayScore;
   const awayWin = hasScore && match.awayScore > match.homeScore;
-  const label = `${match.gameNo ? `Spiel ${match.gameNo}` : "Spiel"} · ${status.label}`;
+  const slot = clean(match.gameNo > 4 ? state.settings.spiel_2_start : state.settings.spiel_1_start);
+  const when = slot || (match.gameNo ? `Spiel ${match.gameNo}` : "Spiel");
+  const label = `${when} · ${status.label}`;
 
   return `
     <article class="match">

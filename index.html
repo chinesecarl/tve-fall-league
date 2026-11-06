@@ -8,10 +8,11 @@
   <meta property="og:title" content="TVE Fall League">
   <meta property="og:description" content="Tabelle, Spieltage und Teams der TVE Fall League.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chinesecarl.github.io/tve-fall-league/">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#f6f1e8">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f6f1e8'/%3E%3Crect x='8' y='8' width='48' height='48' fill='none' stroke='%23211d17' stroke-width='2'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='24' fill='%23211d17' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2026-11-06a">
 </head>
 <body>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -41,8 +42,8 @@
     </div>
   </header>
 
-  <main id="main" class="wrap">
-    <div id="notice" class="notice" hidden></div>
+  <main id="main" class="wrap" tabindex="-1">
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
 
     <section class="view" id="view-tabelle" aria-labelledby="title-tabelle">
       <div class="hero">
@@ -122,13 +123,13 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span class="status"><span class="dot demo" id="statusDot"></span><span id="dataStatus">Lade Daten …</span></span>
+      <span class="status" role="status" aria-live="polite"><span class="dot demo" id="statusDot"></span><span id="dataStatus">Lade Daten …</span></span>
       <span id="updatedAt"></span>
       <span class="footer-brand" id="footerBrand">TVE Fall League</span>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" integrity="sha384-D/t0ZMqQW31H3az8ktEiNb39wyKnS82iFY52QPACM+IjKW3jDUhyIgh2PApRqJZs" crossorigin="anonymous"></script>
+  <script src="app.js?v=2026-11-06a"></script>
 </body>
 </html>
