@@ -108,7 +108,14 @@ const TEAM_QUOTES = {
     "Die Scheibe fliegt, der Puls steigt, die Fairness bleibt.",
     "Wenn der eigene Pass zurückkommt, nennen wir es Doppelpass mit dem Wind.",
     "Der beste Trickwurf ist der, den das eigene Team fangen kann.",
-    "Wir mögen Überraschungen – außer beim eigenen Wurf in die Endzone."
+    "Wir mögen Überraschungen – außer beim eigenen Wurf in die Endzone.",
+    "Das dritte Auge sieht den freien Raum. Die anderen beiden behalten die Scheibe im Blick.",
+    "Geduld ist eine Waffe. Sie hat nur keinen lauten Knopf.",
+    "Der Wind ist ein Mitspieler, der nie zuhört. Wir werfen trotzdem mit ihm.",
+    "Ein Foul, das keiner gesehen hat, ist immer noch ein Foul. Das ist der ganze Sport.",
+    "Langsam wirken und plötzlich da sein – das ist kein Widerspruch, das ist Taktik.",
+    "Die Scheibe lügt nicht. Der Wind schon.",
+    "Wir sehen alt aus. Das ist Tarnung."
   ],
   AL: [
     "Flügel helfen wenig, wenn der Pass ins Aus segelt.",
@@ -117,7 +124,14 @@ const TEAM_QUOTES = {
     "Gegenwind ist nur Rückenwind mit schlechter Presse.",
     "Unsere langen Pässe haben Fernweh. Unser Team bevorzugt erreichbare Reiseziele.",
     "Höhenflug erlaubt, Übermut nicht.",
-    "Die Scheibe ist in der Luft. Unser Plan hoffentlich auch."
+    "Die Scheibe ist in der Luft. Unser Plan hoffentlich auch.",
+    "Die Spannweite beeindruckt. Der Pass, der ankommt, entscheidet.",
+    "Stürme sind nur Thermik mit schlechter Laune.",
+    "Der Horizont ist kein Ziel, sondern die Ausrede für einen sehr langen Laufweg.",
+    "Auch ein Albatros muss landen. Am liebsten in der Endzone.",
+    "Wer die Thermik kennt, spart Kraft. Wer die Endzone kennt, spart Pässe.",
+    "Über dem Meer sieht man weit. Über dem Feld sollte man den Mitspieler sehen.",
+    "Ein Flug ohne Ziel ist Freiheit. Ein Wurf ohne Ziel ist ein Turnover."
   ],
   WI: [
     "Manchmal ist der klügste Wurf der, den man nicht wirft.",
@@ -125,7 +139,13 @@ const TEAM_QUOTES = {
     "Ein guter Pass findet den Mitspieler. Ein großartiger findet ihn im Lauf.",
     "Geduld ist eine Taktik – besonders, wenn der Wind den Pass zurückschickt.",
     "Wir setzen auf Ruhe, Übersicht und gelegentlich sehr schnelle Beine.",
-    "Wenn der Laufweg frei ist, wird aus „gleich“ plötzlich „Punkt“."
+    "Wenn der Laufweg frei ist, wird aus „gleich“ plötzlich „Punkt“.",
+    "Ein Wisent rennt nicht, weil er muss. Er rennt, weil der Laufweg frei ist.",
+    "Stärke zeigt sich nicht im Stoß, sondern im Standhalten.",
+    "Wer den Weg kennt, braucht keine laute Stimme.",
+    "Ein guter Block ist wie ein Baum: Er steht genau dort, wo keiner ihn erwartet.",
+    "Geduld ist kein Warten. Geduld ist ein Laufweg, den der Gegner zu spät sieht.",
+    "Die Herde deckt den Rücken. Der Cut öffnet den Raum."
   ],
   BI: [
     "Zehn Sekunden sind reichlich Zeit – bis jemand laut mitzählt.",
@@ -133,7 +153,13 @@ const TEAM_QUOTES = {
     "Ein Fehlwurf ist nur ein Spielzug mit unerwartetem Ende.",
     "Wir stürmen nicht blind. Wir stürmen mit einem sehr überzeugenden Plan.",
     "Der Punkt ist nah. Also bitte keine Heldentaten mehr.",
-    "Die Scheibe wiegt fast nichts. Der entscheidende Punkt dagegen ganz schön viel."
+    "Die Scheibe wiegt fast nichts. Der entscheidende Punkt dagegen ganz schön viel.",
+    "Eine Stampede beeindruckt. Ein geordneter Angriff punktet.",
+    "Masse ist kein Argument – außer beim Box-out.",
+    "Der Boden bebt nicht vom Brüllen, sondern von den Schritten.",
+    "Ein Fehler ist kein Umweg, sondern ein etwas längerer Weg zum Punkt.",
+    "Die Herde wartet nicht. Der Stall-Count auch nicht.",
+    "Wer im Sturm spielt, nimmt trotzdem einen Plan B mit."
   ],
   GI: [
     "Von hier oben sieht man den freien Laufweg. Hoffentlich auch den eigenen.",
@@ -141,7 +167,13 @@ const TEAM_QUOTES = {
     "Ein weiter Wurf macht Eindruck. Ein freier Mitspieler macht den Punkt.",
     "Übersicht ist gut. Die eigene Endzone im Blick zu behalten, ist besser.",
     "Hohe Scheiben sind unser Spezialgebiet. Den Spielstand haben wir auch im Blick.",
-    "Der Pass war nicht zu hoch. Ihr wart nur zu wenig Giraffe."
+    "Der Pass war nicht zu hoch. Ihr wart nur zu wenig Giraffe.",
+    "Der Kopf ist in den Wolken. Die Füße gehören in die Endzone.",
+    "Große Schritte sind kein Ersatz für den richtigen ersten Schritt.",
+    "Von oben sieht jeder den freien Raum. Nur wenige laufen rechtzeitig los.",
+    "Die Scheibe kommt hoch. Der Punkt kommt später.",
+    "Ein hoher Wurf ist nur dann gut, wenn jemand unten mitdenkt.",
+    "Wer über allen steht, wird von allen gesehen. Nutze den Überblick, bevor es der Gegner tut."
   ],
   WB: [
     "Nasse Schuhe, kalte Scheibe, warme Stimmung: Herbstliga.",
@@ -149,7 +181,13 @@ const TEAM_QUOTES = {
     "Richtig schön ist ein Punkt erst, wenn danach beide Teams lachen.",
     "Regen ist nur Wasser mit einem Spielplan.",
     "Schlamm am Trikot? Beweisfoto für einen gelungenen Spieltag.",
-    "Bei diesem Wetter glänzt nicht die Scheibe, sondern die Fairness."
+    "Bei diesem Wetter glänzt nicht die Scheibe, sondern die Fairness.",
+    "Regen ist kein Wetter. Regen ist ein Heimspiel.",
+    "Wasser findet seinen Weg. Ein guter Pass auch.",
+    "Der Schlamm bleibt am Trikot. Der Punkt bleibt in der Tabelle.",
+    "Wer sich über das Wetter beschwert, hat noch nicht im Regen gepunktet.",
+    "Nasse Hände, trockene Nerven.",
+    "Wer im Regen spielt, braucht keine Ausrede – nur griffige Schuhe."
   ],
   AB: [
     "Kleine Lücke, großer Punkt.",
@@ -157,7 +195,13 @@ const TEAM_QUOTES = {
     "Ein langer Punkt besteht aus vielen kleinen, gut platzierten Pässen.",
     "Wir haben einen Riecher für freie Räume. Für nasse Socken leider auch.",
     "Wer Geduld mitbringt, findet auch im Gedränge die Lücke.",
-    "Ein cleverer Laufweg ist schneller als ein besonders lauter Ruf."
+    "Ein cleverer Laufweg ist schneller als ein besonders lauter Ruf.",
+    "Ein Ameisenbär braucht keine großen Bissen. Viele kleine reichen.",
+    "Der längste Punkt beginnt mit dem kürzesten Pass.",
+    "Wer kleine Lücken ignoriert, wartet auf eine große, die nie kommt.",
+    "Wer den Boden kennt, findet die Lücke. Wer den Gegner kennt, findet sie schneller.",
+    "Die Nase findet den freien Raum. Die Beine müssen ihn nur noch erreichen.",
+    "Ein guter Cut ist leise. Der Punkt danach ist es nicht."
   ],
   KA: [
     "Hohe Scheiben? Für uns kein Problem – die Landung danach schon.",
@@ -165,7 +209,13 @@ const TEAM_QUOTES = {
     "Kommt der Pass zu hoch, nennen wir es Sprungtraining.",
     "Unsere Beine sagen: „Noch ein Lauf!“ Unsere Lunge beantragt eine Auszeit.",
     "Wenn der erste Sprung nicht reicht, war das eben die Aufwärmrunde.",
-    "Ein Punkt in der Endzone? Das nennen wir einen gelungenen Hopser."
+    "Ein Punkt in der Endzone? Das nennen wir einen gelungenen Hopser.",
+    "Der Beutel ist für Snacks. Der Punkt ist für die Tabelle.",
+    "Ein Känguru springt nicht, um zu prahlen. Es springt, weil der Boden zu langsam ist.",
+    "Wer hoch springt, landet irgendwo. Wer klug springt, landet in der Endzone.",
+    "Im Outback gibt es keine Abkürzungen. Auf dem Feld heißen sie Laufwege.",
+    "Schnell sein ist gut. Schnell bremsen ist besser.",
+    "Ein Hopser bringt dich nicht in die Endzone. Ein Laufweg schon"
   ]
 };
 
