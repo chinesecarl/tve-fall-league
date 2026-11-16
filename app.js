@@ -121,7 +121,7 @@ const TEAM_QUOTES = {
     "Der Horizont ist kein Ziel. Er ist die Ausrede für meinen Long-Pass.",
     "Gegenwind ist nur Rückenwind mit schlechter Presse.",
     "Ein Albatros landet nicht. Er macht eine Pause in der Endzone.",
-    "Kommt der Pass an, war es eine Flanke. Kommt er nicht an, ein Auswurf.",
+    "Kommt der Pass an, war es eine Flanke. Kommt er nicht an, war es ein Auswurf.",
     "Sie nennen es Turnover. Ich nenne es einen sehr langen Pass.",
     "Die Scheibe ist in der Luft. Mein Plan ist es auch.",
     "Über den Wolken sieht man weit. Über dem Feld sieht man den Mitspieler. Meistens.",
